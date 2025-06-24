@@ -27,15 +27,14 @@ export default function App() {
     setLoading(true);
 
     try {
-      const res = await fetch('https://api.chatanywhere.tech/v1/chat/completions', {
+      const res = await fetch('https://autodeploy.top/api/graphql', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer sk-1234567890'
         },
         body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: updatedMessages,
+          query: `query Ask($prompt: String!) { ask(prompt: $prompt) }`,
+          variables: { prompt: input.trim() },
         }),
       });
       if (!res.ok) {
@@ -43,7 +42,7 @@ export default function App() {
       }
 
       const data = await res.json();
-      const aiReply = data.choices?.[0]?.message?.content?.trim() || '抱歉，AI 没有回应';
+      const aiReply = data.data?.ask?.trim() || '抱歉，AI 没有回应';
 
       setMessages([...updatedMessages, { role: 'assistant', content: aiReply }]);
     } catch (err) {

@@ -9,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     clean: true, // 每次构建清理旧文件
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx'], // 支持导入 jsx 文件不用写扩展名
