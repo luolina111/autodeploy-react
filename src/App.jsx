@@ -27,7 +27,7 @@ export default function App() {
     setLoading(true);
 
     try {
-      const res = await fetch('https://autodeploy.top/api/graphql', {
+      const res = await fetch('https://api.autodeploy.top/graphql', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
